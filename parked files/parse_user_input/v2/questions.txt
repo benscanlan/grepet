@@ -1,0 +1,7 @@
+Have you tried reseting network settings?
+Are you up to date with the latest iOS software available for your device? 
+"What seems to be the issue?"
+"How can I help?"
+confirm the issue
+confirm with user
+function whatdevice() run on every early argument.
