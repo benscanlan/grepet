@@ -1,8 +1,3 @@
-#frind replace ios with ios.settings
-#keep all lower case
-#cust convert and to and for print directions
-#class map of menus
-#
 class Settings:
     #paragraph_1
     #comment: Apple_ID grossely unchecked for accuracy
@@ -63,7 +58,7 @@ class Settings:
         #Sign_Out_Button:
         pass
     #paragraph_2
-    Airplane_Mode = 0 #what about toggle on off for trouble shooting?
+    Airplane_Mode = 0
     class WiFi:
         pass
     class Bluetooth:
@@ -116,18 +111,7 @@ class Settings:
 
 
 Settings = Settings() #perfect
-# Fill the fields of the record
-Settings.Apple_ID.name = 1
-Settings.dept = 'computer lab'
-Settings.Bluetooth = 1000
-#hello.toggle = 1
 
 if Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button == None:
     print("none")
-#models should appear exactly how it appears in the phone
-# may even switch vars to class objects later
-#will be mapping all paths to human readable form lower case with 'and' is acceptable for variable names.
-#print(f'{Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button=}'.split('=')[0])
-    
-#user acceptable objects
 
