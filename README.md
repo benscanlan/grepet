@@ -23,7 +23,7 @@ Variables can be called in this fashion:
         print("Have you tried canceling family sharing?")
         print("Navigate to, Settings > Your Name > Set Up Family Sharing > Cancel Button" )        
 Variables modified outside the class:
-        
+    
     Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button = 1
 ### Basic Usage
 1. Clone to desktop. I use github desktop gui.
