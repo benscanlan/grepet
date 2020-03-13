@@ -6,7 +6,9 @@ Let's automate troubleshooting together. We will be using python 3.8!
 Work on mapping iOS 13 settings menu for computer `bool` and human reability `class`.
 
 `1` stands for 'toggled on,' 'set,' or 'toggled on and off.' 
+
 `0` 'toggled off,' or not 'set'. 
+
 `None` will stand for settings not vistied during the troubleshooting process. 
 
 Variables are declared in this fashion: 
