@@ -12,18 +12,18 @@ Work on mapping iOS 13 settings menu for computer `bool` and human reability `cl
 `None` will stand for settings not vistied during the troubleshooting process. 
 
 Variables are declared in this fashion: 
-`class Settings:
-    class Apple_ID:
-        class Set_Up_Family_Sharing:
-            Cancel_Button = None
-Settings = Settings( )`
+    class Settings:
+        class Apple_ID:
+            class Set_Up_Family_Sharing:
+                Cancel_Button = None
+                Settings = Settings( )
 
 Variables modified outside the class:
 `Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button = 1`
 
 Variables can be called in this fashion: 
-`if Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button == None:
-    print("Have you tried canceling family sharing?")`
+    if Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button == None:
+        print("Have you tried canceling family sharing?")
 
 ### Basic Usage
 1. Clone to desktop. I use github desktop gui.
