@@ -24,7 +24,7 @@ Variables can be called in this fashion:
         print("Navigate to, Settings > Your Name > Set Up Family Sharing > Cancel Button" )        
 Variables modified outside the class:
         
-        Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button = 1
+    Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button = 1
 ### Basic Usage
 1. Clone to desktop. I use github desktop gui.
 2. Command to activate virtual environment `$ source <path/to/oblique>/bin/activate` with bash/zsh.
