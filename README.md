@@ -5,8 +5,9 @@ Let's automate troubleshooting together. We will be using python 3.8!
 ### Current Objective:
 Work on mapping iOS 13 settings menu for computer `bool` and human reability `class`.
 
+### Variables:
 * '1' stands for 'toggled on,' 'set,' or 'toggled on and off.' 
-* '0' toggled off,' or not 'set'. 
+* '0' toggled off, or not set. 
 * 'None' will stand for settings not vistied during the troubleshooting process. 
 
 Variables are declared in this fashion: 
@@ -15,17 +16,15 @@ Variables are declared in this fashion:
         class Apple_ID:
             class Set_Up_Family_Sharing:
                 Cancel_Button = None
-                Settings = Settings( )
-
-Variables modified outside the class:
-    
-    Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button = 1
-
+    Settings = Settings( )
 Variables can be called in this fashion: 
     
     if Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button == None:
         print("Have you tried canceling family sharing?")
-
+        print("Navigate to, Settings > Your Name > Set Up Family Sharing > Cancel Button" )        
+Variables modified outside the class:
+        
+        Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button = 1
 ### Basic Usage
 1. Clone to desktop. I use github desktop gui.
 2. Command to activate virtual environment `$ source <path/to/oblique>/bin/activate` with bash/zsh.
