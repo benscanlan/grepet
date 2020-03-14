@@ -70,7 +70,21 @@ class Settings:
         pass
     pass
     #paragraph_3
-#    class Notifications:
+    class Notifications:
+			Show_Previews = None
+			
+			class Announce_Messages_with_Siri:
+				Announce_Messages_with_Siri_Toggle = None
+				Reply_without_Confirmation = None
+				
+				class Announce_Messages_From_App:
+					Messages_Announce_Messages_with_Siri_Toggle = None
+					Messages_Announce_Messages_From = None
+					
+			# class Siri_Suggestions:
+				# Insert get list of installed apps function here
+				# Activity_Toggle = None			
+			
 #    class Sounds:
 #    class Do_Not_Disturb:
 #    class Screen_Time:
