@@ -29,8 +29,10 @@ Variables modified outside the class:
 1. Clone to desktop. I use github desktop gui.
 2. Command to activate virtual environment `$ source <path/to/oblique>/bin/activate` with bash/zsh.
 3. Leaving the virtual environment `deactivate`
-4. Run program.py as `python3 <program.py>`
-5. Install packages by `pip3 install <package>`
+4. Add files  `touch newfile.py`
+5. Add directories `mkdir newdir`
+6. Run program.py as `python3 <program.py>`
+7. Install packages by `pip3 install <package>`
 
 ### Xcode Editing Settings_IOS13.py
  enable-code-folding-by-default
