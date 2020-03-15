@@ -166,7 +166,7 @@ class Settings:
 			Set_Automatically_Toggle = None
 			Time_Zone = None
 			Date_and_Time_Manual = None
-
+			
 #    class Control_Center:
 #    class Display_and_Brightness:
 #    class Wallpaper:
