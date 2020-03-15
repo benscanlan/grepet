@@ -42,7 +42,7 @@ class Settings:
         
         class Find_My:
             class Find_My_iPhone:
-				Find_My_iPhone_Toggle = None
+                Find_My_iPhone_Toggle = None
                 Enable_Offline_Finding_Toggle = None
                 Send_Last_Location_Toggle = None
                         
@@ -85,7 +85,7 @@ class Settings:
             # Insert get list of installed apps function here
             # Activity_Toggle = None			
 			
-	class Sounds_and_Haptics:
+    class Sounds_and_Haptics:
         Vibrate_on_Ring_Toggle = None
         Vibrate_on_Silent_Toggle = None
         Volume_Level = None
