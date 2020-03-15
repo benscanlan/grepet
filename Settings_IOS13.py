@@ -71,19 +71,19 @@ class Settings:
     pass
     #paragraph_3
     class Notifications:
-		Show_Previews = None
+        Show_Previews = None
 	
-		class Announce_Messages_with_Siri:
+        class Announce_Messages_with_Siri:
             Announce_Messages_with_Siri_Toggle = None
-			Reply_without_Confirmation = None
+            Reply_without_Confirmation = None
 				
-			class Announce_Messages_From_App:
-				Messages_Announce_Messages_with_Siri_Toggle = None
-				Messages_Announce_Messages_From = None
+            class Announce_Messages_From_App:
+                Messages_Announce_Messages_with_Siri_Toggle = None
+                Messages_Announce_Messages_From = None
 					
-		# class Siri_Suggestions:
-			# Insert get list of installed apps function here
-			# Activity_Toggle = None			
+        # class Siri_Suggestions:
+            # Insert get list of installed apps function here
+            # Activity_Toggle = None			
 			
 	class Sounds_and_Haptics:
         Vibrate_on_Ring_Toggle = None
