@@ -71,24 +71,102 @@ class Settings:
     pass
     #paragraph_3
     class Notifications:
-			Show_Previews = None
-			
-			class Announce_Messages_with_Siri:
-				Announce_Messages_with_Siri_Toggle = None
-				Reply_without_Confirmation = None
+		Show_Previews = None
+	
+		class Announce_Messages_with_Siri:
+			Announce_Messages_with_Siri_Toggle = None
+			Reply_without_Confirmation = None
 				
-				class Announce_Messages_From_App:
-					Messages_Announce_Messages_with_Siri_Toggle = None
-					Messages_Announce_Messages_From = None
+			class Announce_Messages_From_App:
+				Messages_Announce_Messages_with_Siri_Toggle = None
+				Messages_Announce_Messages_From = None
 					
-			# class Siri_Suggestions:
-				# Insert get list of installed apps function here
-				# Activity_Toggle = None			
+		# class Siri_Suggestions:
+			# Insert get list of installed apps function here
+			# Activity_Toggle = None			
 			
-#    class Sounds:
-#    class Do_Not_Disturb:
+	class Sounds_and_Haptics:
+		Vibrate_on_Ring_Toggle = None
+		Vibrate_on_Silent_Toggle = None
+		Volume_Level = None
+		Change_with_Buttons_Toggle = None
+		Ringtone = None
+		Text_Tone = None
+		New_Voicemail = None
+		New_Mail = None
+		Sent_Mail = None
+		Calendar_Alerts = None
+		Reminder_Alerts = None
+		AirDrop = None
+		Keyboard_Clicks_Toggle = None
+		Lock_Sound = None
+		System_Haptics = None
+		
+    class Do_Not_Disturb:
+		Do_Not_Disturb_Toggle = None
+		Scheduled_Toggle = None
+		
+		class Scheduled_DND:
+			From_Time = None
+			To_Time = None
+			
+		Dim_Lock_Screen_Toggle = None
+		Silence = None
+		Allow_Calls_From = None
+		Repeated_Calls_Toggle = None
+		DND_Driving_Activate = None
+		AutoReply_To = None
+				
 #    class Screen_Time:
-#    class General:
+	class General:
+		class About:
+			Name = None
+			Software_Version = None
+			Model_Name = None
+			Model_Number = None
+			Serial_Number = None
+			AppleCare = None
+			Songs = None
+			Videos = None
+			Photos = None
+			Applications = None
+			Capacity = None
+			Available = None
+			Wifi_Address = None
+			Bluetooth_Address = None
+			Model_Firmware = None
+			SEID = None
+			EID = None
+			Network = None
+			Carrier = None
+			IMEI = None
+			ICCID = None
+			MEID = None
+			
+			class Certificate_Trust_Settings:
+				Trust_Store_Version = None
+				Trust_Asset_Version = None
+		
+		class Software_Update:
+			Automatic_Updates_Toggle = None
+			
+		AirDrop	= None
+		
+		class Airplay_and_Handoff:
+			Automatically_Airplay_to_TVs = None
+			Transfer_to_HomePod_Toggle = None
+			Handoff_Toggle = None
+			
+		#class CarPlay:
+		#class iPhone_Storage:
+		#class Background_App_Refresh:
+		
+		class Date_and_Time:
+			Hour_Time_24_Toggle = None
+			Set_Automatically_Toggle = None
+			Time_Zone = None
+			Date_and_Time_Manual = None
+
 #    class Control_Center:
 #    class Display_and_Brightness:
 #    class Wallpaper:
