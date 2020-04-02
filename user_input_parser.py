@@ -1,9 +1,17 @@
-#from variables.py import *
+from Settings_IOS13 import *
 #pip install pyspellchecker
 from spellchecker import SpellChecker
 spell = SpellChecker()
 user_input = 2
 user_input = 2
+Settings = Settings()
+Settings.Apple_ID.Name_Phone_Numbers_Email.Change_Password = 1
+print(Settings)
+#have we tried action? heres how to action. did action work?
+#can't sign into bell south account? this action fixies that. like a support forum
+#first its going to have to guess a problem
+#then conjure a solution
+
 
 def parse_user_into_list(user_input): # good to fuck can refine later
     return user_input.lower().split(" ")
@@ -31,6 +39,12 @@ def affirmative_bool(user_input):
     else:
         #print("None")
         return 1
+# def checkwifi():
+#     if settings.reset_network_settings = 1
+#         wifi = 0:
+#         #run once
+
+
 
 def main():
     print("python main function")

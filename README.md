@@ -1,31 +1,45 @@
 # oblique
 
-Let's automate troubleshooting together. We will be using python 3.8!
+Let's automate troubleshooting together.hjkh We will be using python 3.8!
 
 ### Current Objective:
 Work on mapping iOS 13 settings menu for computer `bool` and human reability `class`.
 
-### Variables:
-* '1' stands for 'toggled on,' 'set,' or 'toggled on and off.' 
-* '0' toggled off, or not set. 
-* 'None' will stand for settings not vistied during the troubleshooting process. 
+Declare outside the class row by row
+s.ai.pus.cp #settings > Apple ID ... , 0
+s.ai.pus.ac #settings > Apple ID ... , 0
+Crazy all encompassing object for each setting. Has sub variables string pathname value if visited etc.
+Heavy tree endings
+If passwords and preview in the same list
+List.pa list.pr
+PUA = PASSWORDS AND ACCOUNTS
+puaus = passwords accounts and security
 
-Variables are declared in this fashion: 
-    
+
+### Variables:
+* '1' stands for 'toggled on,' 'set,' or 'toggled on and off.'
+* '0' toggled off, or not set.
+* 'None' will stand for settings not vistied during the troubleshooting process.
+
+Variables are declared in this fashion:
+
     class Settings:
         class Apple_ID:
             class Set_Up_Family_Sharing:
                 Cancel_Button = None
     Settings = Settings( )
-Variables can be called in this fashion: 
-    
+Variables can be called in this fashion:
+
     if Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button == None:
         print("Have you tried canceling family sharing?")
         print("Navigate to, Settings > Your Name > Set Up Family Sharing > Cancel Button" )        
 Variables modified outside the class:
-    
+
     Settings.Apple_ID.Set_Up_Family_Sharing.Cancel_Button = 1
 ### Basic Usage
+EDITED:
+Build your own python venv from a requirements.txt file
+
 1. Clone to desktop. I use github desktop gui.
 2. Command to activate virtual environment `$ source <path/to/oblique>/bin/activate` with bash/zsh.
 3. Leaving the virtual environment `deactivate`
