@@ -5,23 +5,16 @@ Let's automate troubleshooting together.hjkh We will be using python 3.8!
 ### Current Objective:
 Work on mapping iOS 13 settings menu for computer `bool` and human reability `class`.
 
-Declare outside the class row by row
+  #Declare outside the class row by row
+  s.ai.pus.cp #settings > Apple ID ... , 0
+  s.ai.pus.ac #settings > Apple ID ... , 0
 
-s.ai.pus.cp #settings > Apple ID ... , 0
+Crazy all encompassing object for each setting. Has sub variables string pathname value if visited etc. Large Objects as end nodes of class structure for max flexibility super object type creation later has path in string to user human readable format #settings > Apple ID
 
-s.ai.pus.ac #settings > Apple ID ... , 0
-
-Crazy all encompassing object for each setting. Has sub variables string pathname value if visited etc.
-
-Heavy tree endings
-
-If passwords and preview in the same list
-
-List.pa list.pr
-
-PUA = PASSWORDS AND ACCOUNTS
-
-puaus = passwords accounts and security
+  #If passwords and preview in the same list
+  list.pa list.pr
+  PUA #PASSWORDS AND ACCOUNTS
+  puaus #passwords accounts and security
 
 
 ### Variables:
