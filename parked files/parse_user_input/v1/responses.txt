@@ -1,8 +1,0 @@
-Have you tried reseting network settings? To do this go to the app settings > scroll down to general > click reset > click reset network settings
-Are you up to date with the latest iOS software available for your device? 
-If you are having trouble downloading remove the update by then reinstall.
-"How can I help?"
-"What seems to be the issue?"
-confirm the issue
-confirm with user
-function whatdevice() run on every early argument.

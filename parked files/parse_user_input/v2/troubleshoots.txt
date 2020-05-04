@@ -1,2 +1,0 @@
-To do this go to the app settings > scroll down to general > click reset > click reset network settings
-If you are having trouble downloading remove the update by then reinstall.

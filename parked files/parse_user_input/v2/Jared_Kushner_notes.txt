@@ -1,8 +1,0 @@
-#Jared Kushner project management 3 phase approach.
-    #1 [Assessment] What has been tried and what can be done.
-        #or [Analyze] Talk to lots of different people with more experience than self.
-    #2 [Strategy] Come up with a plan. Know the problem.
-    #3 [Vigorous] execution
-    #"If you can't measure it you can't manage it."
-    #"A lot of noise (social media)"
-    #"things are not always static they are fluid dynamic "
