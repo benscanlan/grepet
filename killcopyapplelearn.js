@@ -7,3 +7,10 @@ CDN https://www.w3schools.com/jquery/jquery_get_started.asp
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+
+<p>If you click on me, I will disappear.</p>
+<p>Click me away!</p>
+<p>Click me too!</p>
+
+
+Click me too!
