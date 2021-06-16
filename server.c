@@ -5,34 +5,68 @@
 //             3
 //     respond
 
-#include <stdio.h> // Input Output for debugging
-#include <stdlib.h> //standard library <string.h> // strings, kinda important
-#include <errno.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <string.h>
-int main() {
-    // printf() displays the string inside quotation
-     printf("Hello, World!");//howdy Benjamin
-    //returns a filecontents
-    FILE *filePointer ;
-    char dataToBeRead[50]; // can ask for size ahead of time of file for best memory ussage
-    char routehandler[] = "disable_context_menu.html";
-    filePointer = fopen(articles/routehandler, "r") ;
+#include "headers.h"
+#define SERVER_PORT 8001
+#define MAX_PENDING 10
+void setHttpHeader(char httpHeader[])
+{
+    // File object to return
+    FILE *htmlData = fopen("index.html", "r");
 
-    //check if the file pointer is null if null route cannot be resolved send 404 page error code
-    if ( filePointer == NULL ) {
-          printf( "404 file failed to open." ) ;
+    char line[100];
+    char responseData[8000];
+    while (fgets(line, 100, htmlData) != 0) {
+        strcat(responseData, line);
+    }
+    // char httpHeader[8000] = "HTTP/1.1 200 OK\r\n\n";
+    strcat(httpHeader, responseData);
+}
+void report(struct sockaddr_in *serverAddress)
+  {
+      char hostBuffer[INET6_ADDRSTRLEN];
+      char serviceBuffer[NI_MAXSERV]; // defined in `<netdb.h>`
+      socklen_t addr_len = sizeof(*serverAddress);
+      int err = getnameinfo(
+          (struct sockaddr *) serverAddress,
+          addr_len,
+          hostBuffer,
+          sizeof(hostBuffer),
+          serviceBuffer,
+          sizeof(serviceBuffer),
+          NI_NUMERICHOST
+      );
+      if (err != 0) {
+          printf("It's not working!!\n");
       }
-    else {
-        printf("The file is now opened.\n") ;
+      printf("\n\n\tServer listening on http://%s:%s\n", hostBuffer, serviceBuffer);
+  }
 
-        while( fgets ( dataToBeRead, 50, filePointer ) != NULL ) { // using fgets() method fgets line by line
-              printf( "%s" , dataToBeRead ) ; // Print the dataToBeRead
-           }
-          fclose(filePointer) ;
-          printf("Data successfully read from file GfgTest.c\n");
-          printf("The file is now closed.") ;
+
+
+int main() {
+    char httpHeader[8000] = "HTTP/1.1 200 OK\r\n\n";
+
+    int serverSocket = socket(AF_INET,SOCK_STREAM,0);
+    //int socket = getaddrinfo(NULL, port, &hints, &result)) != 0
+    struct sockaddr_in serverAddress;
+    serverAddress.sin_family = AF_INET;
+    serverAddress.sin_port = htons(SERVER_PORT);
+    serverAddress.sin_addr.s_addr = htonl(INADDR_LOOPBACK);//inet_addr("127.0.0.1");
+
+    bind(serverSocket,(struct sockaddr *) &serverAddress,sizeof(serverAddress));
+    if (listen(serverSocket, MAX_PENDING) == -1){
+      //perror("stream-talk-server: listen");
+      close(serverSocket);
+      return 1;
+    }
+    report(&serverAddress);
+    setHttpHeader(httpHeader);
+    int clientSocket;
+    while(1)
+    {
+        clientSocket = accept(serverSocket, NULL, NULL);
+        send(clientSocket, httpHeader, sizeof(httpHeader), 0);
+        close(clientSocket);
       }
       return 0;
   }
