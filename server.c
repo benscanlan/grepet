@@ -1,72 +1,43 @@
-//cTops.c
-//while (Listen)
-//    function 1
-//             2
-//             3
-//     respond
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/socket.h>
+#include <string.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <fcntl.h> // for open
+#include <unistd.h> // for close
 
-#include "headers.h"
-#define SERVER_PORT 8001
-#define MAX_PENDING 10
-void setHttpHeader(char httpHeader[])
-{
-    // File object to return
-    FILE *htmlData = fopen("index.html", "r");
 
-    char line[100];
-    char responseData[8000];
-    while (fgets(line, 100, htmlData) != 0) {
-        strcat(responseData, line);
+int main(int argc, char** argv) {
+    struct addrinfo hints, *server;
+    memset(&hints, 0, sizeof hints);
+    hints.ai_family =  AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_flags = AI_PASSIVE;  //SOCK_NONBLOCK;
+    getaddrinfo(NULL, "80", &hints, &server);
+
+    int sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
+    bind(sockfd, server->ai_addr, server->ai_addrlen);
+    listen(sockfd, 10);
+ 
+    struct sockaddr_storage client_addr;
+    socklen_t addr_size = sizeof client_addr;
+    char headers[] = "HTTP/1.0 200 OK\r\nServer: CPi\r\nContent-type:text/html\r\n\r\n";
+    char buffer[2048];
+    char html[] = "<html><head><title>Temperature</title></head><body>{\"humidity\":81%,\"airtemperature\":23.5C}</p></body></html>\r\n";
+    char data[2048] = {0};
+    snprintf(data, sizeof data,"%s %s", headers, html);
+
+    while(1) {
+        int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
+        if (client_fd > 0) {
+            int n = read(client_fd, buffer, 2048);
+            printf("%s", buffer);
+            fflush(stdout);
+            n = write(client_fd, data, strlen(data));
+            close(client_fd);
+        }
     }
-    // char httpHeader[8000] = "HTTP/1.1 200 OK\r\n\n";
-    strcat(httpHeader, responseData);
+ return (EXIT_SUCCESS);
 }
-void report(struct sockaddr_in *serverAddress)
-  {
-      char hostBuffer[INET6_ADDRSTRLEN];
-      char serviceBuffer[NI_MAXSERV]; // defined in `<netdb.h>`
-      socklen_t addr_len = sizeof(*serverAddress);
-      int err = getnameinfo(
-          (struct sockaddr *) serverAddress,
-          addr_len,
-          hostBuffer,
-          sizeof(hostBuffer),
-          serviceBuffer,
-          sizeof(serviceBuffer),
-          NI_NUMERICHOST
-      );
-      if (err != 0) {
-          printf("It's not working!!\n");
-      }
-      printf("\n\n\tServer listening on http://%s:%s\n", hostBuffer, serviceBuffer);
-  }
-
-
-
-int main() {
-    char httpHeader[8000] = "HTTP/1.1 200 OK\r\n\n";
-
-    int serverSocket = socket(AF_INET,SOCK_STREAM,0);
-    //int socket = getaddrinfo(NULL, port, &hints, &result)) != 0
-    struct sockaddr_in serverAddress;
-    serverAddress.sin_family = AF_INET;
-    serverAddress.sin_port = htons(SERVER_PORT);
-    serverAddress.sin_addr.s_addr = htonl(INADDR_LOOPBACK);//inet_addr("127.0.0.1");
-
-    bind(serverSocket,(struct sockaddr *) &serverAddress,sizeof(serverAddress));
-    if (listen(serverSocket, MAX_PENDING) == -1){
-      //perror("stream-talk-server: listen");
-      close(serverSocket);
-      return 1;
-    }
-    report(&serverAddress);
-    setHttpHeader(httpHeader);
-    int clientSocket;
-    while(1)
-    {
-        clientSocket = accept(serverSocket, NULL, NULL);
-        send(clientSocket, httpHeader, sizeof(httpHeader), 0);
-        close(clientSocket);
-      }
-      return 0;
-  }
