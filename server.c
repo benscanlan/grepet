@@ -1,13 +1,17 @@
+//input output
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/socket.h>
+//data types
 #include <string.h>
+//server()
 #include <sys/types.h>
+#include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
 #include <fcntl.h> // for open
 #include <unistd.h> // for close
-#
+//encryption algos
+//#include <openssl/md5.h> //https://github.com/coturn/coturn/issues/242
 
 //so clean commit
 //function server()
