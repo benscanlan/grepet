@@ -67,7 +67,7 @@ int server() {
     socklen_t addr_size = sizeof client_addr;
     char headers[] = "HTTP/1.0 200 OK\r\nServer: CPi\r\nContent-type:text/html\r\n\r\n";
     char buffer[2048];
-    char html[] = "<html><head><title>Temperature</title></head><body>{\"humidity\":81%,\"airtemperature\":23.5C}</p></body></html>\r\n";
+    char html[] = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
     char data[2048] = {0};
     snprintf(data, sizeof data,"%s %s", headers, html);
 
