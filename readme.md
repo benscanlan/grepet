@@ -27,6 +27,7 @@ server()    {
 
     while(1) {
         int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
+    }
 }
 ```
 
