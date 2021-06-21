@@ -9,6 +9,10 @@ It's an easy way to answer questions that your [audience](https://en.wikipedia.o
 ## Usage
 open terminal and the type following.
 ```bash
+sudo apt install git
+git config --global user.name "benscanlan"
+git config --global user.email "bscanlan@mail.csuchico.edu"
+git clone https://github.com/benscanlan/grepet
 cd grepet
 make
 ./server
