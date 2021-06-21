@@ -12,10 +12,13 @@ open terminal and the type following.
 sudo apt install git
 git config --global user.name "benscanlan"
 git config --global user.email "bscanlan@mail.csuchico.edu"
+git config --global core.editor vi
 git clone https://github.com/benscanlan/grepet
 cd grepet
 make
 ./server
+git commit -a
+git push
 ```
 open browser navigate to loopback http://127.0.0.1/hello
 
