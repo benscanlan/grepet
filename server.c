@@ -79,6 +79,7 @@ int server() {
         int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
         if (client_fd > 0) {
             int n = read(client_fd, buffer, 2048);
+            printf("%d", n);
             printf("%s", buffer);
             fflush(stdout);
             n = write(client_fd, data, strlen(data));
