@@ -59,9 +59,9 @@ int server() {
     memset(&hints, 0, sizeof hints);
     hints.ai_family =  AF_INET;
     hints.ai_socktype = SOCK_STREAM;
-    hints.ai_flags = AI_PASSIVE;  //SOCK_NONBLOCK;
+    hints.ai_flags = AI_PASSIVE || SOCK_NONBLOCK;
     char* grepetcom = NULL; //www.grepet.com
-    getaddrinfo(grepetcom, "80", &hints, &server);
+    getaddrinfo(grepetcom, "5432", &hints, &server);
     
     struct sockaddr_storage client_addr;
     socklen_t addr_size = sizeof client_addr;
