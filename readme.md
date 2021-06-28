@@ -16,7 +16,9 @@ git config --global core.editor vi
 git clone https://github.com/benscanlan/grepet
 cd grepet
 make
-./server
+sudo ./server #you cant run below 1024 as normal user. only as root can you run port 80 on ubuntu. bind is failing with no error message in logic. if port 80 run as sudo ./server on ubuntu
+sudo lsof -Pi tcp:80 | head -3
+sudo tcpdump port 80 #command works just slow to generate traffic data 
 git commit -a
 git push
 ```

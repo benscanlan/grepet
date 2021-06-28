@@ -61,7 +61,12 @@ int server() {
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_flags = AI_PASSIVE || SOCK_NONBLOCK;
     char* grepetcom = NULL; //www.grepet.com
-    getaddrinfo(grepetcom, "5432", &hints, &server);
+    getaddrinfo(grepetcom, "80", &hints, &server);
+    // you cant run below 1024 as normal user. only as root can you run port 80 on ubuntu. bind is failing with no error message in logic. if port 80 run as sudo ./server on ubuntu
+    //sudo ./server
+    //sudo lsof -Pi tcp:80 | head -3
+    //sudo tcpdump port 80 // command works just slow to generate traffic data 
+
     
     struct sockaddr_storage client_addr;
     socklen_t addr_size = sizeof client_addr;
