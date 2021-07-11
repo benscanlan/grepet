@@ -14,6 +14,9 @@ git config --global user.name "benscanlan"
 git config --global user.email "bscanlan@mail.csuchico.edu"
 git config --global core.editor vi
 git clone https://github.com/benscanlan/grepet
+git config --global credential.helper store
+git config --global credential.helper cache
+#git remote set-url origin benscanlan@github.com:/benscanlan/grepet.git
 cd grepet
 make
 sudo ./server #you cant run below 1024 as normal user. only as root can you run port 80 on ubuntu. bind is failing with no error message in logic. if port 80 run as sudo ./server on ubuntu
