@@ -19,6 +19,10 @@
 //function POST
 //function readfile()
 //function writefile()
+const char* rs(){
+  char* name = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
+  return name;
+  }
 
 int readfile() {
   // printf() displays the string inside quotation
@@ -55,6 +59,7 @@ int readfile() {
 }
 
 int server() {
+
     struct addrinfo hints, *server;
     memset(&hints, 0, sizeof hints);
     hints.ai_family =  AF_INET;
@@ -72,10 +77,14 @@ int server() {
     socklen_t addr_size = sizeof client_addr;
     char headers[] = "HTTP/1.0 200 OK\r\nServer: CPi\r\nContent-type:text/html\r\n\r\n";
     char buffer[2048];
-    char html[] = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
+    //printf("%s", rs());
+    //char html[1000] = "<p>";
+    //fgets(html,1000,rs());
+    //char* ptr = (char*)malloc(rs()*sizeof(char));
     char data[2048] = {0};
-    snprintf(data, sizeof data,"%s %s", headers, html);
-
+    //snprintf() — Print Formatted Data to Buffer
+    snprintf(data, sizeof data,"%s %s", headers, rs()); //char html[1000] = "<p>"; swap rs() for html
+    //**** //snprintf(data, sizeof data,"%s %s", headers, rs(), CSSFILE?); ****
     int sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
     bind(sockfd, server->ai_addr, server->ai_addrlen);
     listen(sockfd, 10);
