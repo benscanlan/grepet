@@ -20,8 +20,8 @@
 //function read()
 //function write()
 const char* html(){
-  char* name = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
-  return name;
+  char* html = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
+  return html;
   }
 
 int readfile() {
