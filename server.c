@@ -1,4 +1,3 @@
-􀌋􀨳􀯔􀢕􀨤􀤆
 //input output
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,9 +17,9 @@
 //function server()
 //funtion GET
 //function POST
-//function readfile()
-//function writefile()
-const char* rs(){
+//function read()
+//function write()
+const char* html(){
   char* name = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
   return name;
   }
@@ -82,10 +81,10 @@ int server() {
     //char html[1000] = "<p>";
     //fgets(html,1000,rs());
     //char* ptr = (char*)malloc(rs()*sizeof(char));
-    char data[2048] = {0};
     //snprintf() — Print Formatted Data to Buffer
-    snprintf(data, sizeof data,"%s %s", headers, rs()); //char html[1000] = "<p>"; swap rs() for html
-    //**** //snprintf(data, sizeof data,"%s %s", headers, rs(), CSSFILE?); ****
+    char data[2048] = {0};
+    snprintf(data, sizeof data,"%s %s", headers, html());
+    //**** //snprintf(data, sizeof data,"%s %s", headers, html(), CSSFILE?); ****
     int sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
     bind(sockfd, server->ai_addr, server->ai_addrlen);
     listen(sockfd, 10);
