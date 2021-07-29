@@ -8,10 +8,18 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#include <fcntl.h> // for open
+//#include <fcntl.h> // for open
 #include <unistd.h> // for close
 //encryption algos
 //#include <openssl/md5.h> //https://github.com/coturn/coturn/issues/242
+
+//https://github.com/mp3guy/Logger2/issues/1
+#ifndef SOCK_NONBLOCK
+#include <fcntl.h>
+# define SOCK_NONBLOCK O_NONBLOCK
+#endif
+
+
 
 //so clean commit
 //function server()
@@ -64,7 +72,16 @@ int server() {
     memset(&hints, 0, sizeof hints);
     hints.ai_family =  AF_INET;
     hints.ai_socktype = SOCK_STREAM;
-    hints.ai_flags = AI_PASSIVE || SOCK_NONBLOCK;
+    //hints.ai_flags = AI_PASSIVE || SOCK_NONBLOCK;
+    //https://www.i-programmer.info/programming/cc/9993-c-sockets-no-need-for-a-web-server.html?start=2
+    //hints.ai_flags = AI_PASSIVE
+    //https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/freeaddrinfo.3.html
+    #if defined __APPLE__ && defined __MACH__ //https://github.com/mp3guy/Logger2/issues/1
+        hints.ai_flags = AI_PASSIVE | SOCK_NONBLOCK; //||
+    #else
+        hints.ai_flags = SOCK_NONBLOCK;
+    #endif
+    
     char* grepetcom = NULL; //www.grepet.com
     getaddrinfo(grepetcom, "80", &hints, &server);
     // you cant run below 1024 as normal user. only as root can you run port 80 on ubuntu. bind is failing with no error message in logic. if port 80 run as sudo ./server on ubuntu
