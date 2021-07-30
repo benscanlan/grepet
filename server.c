@@ -18,7 +18,8 @@
 #include <fcntl.h>
 # define SOCK_NONBLOCK O_NONBLOCK
 #endif
-
+#include <stdio.h>
+#include <stdbool.h>
 
 
 //so clean commit
@@ -78,7 +79,7 @@ int server() {
     //hints.ai_flags = AI_PASSIVE
     //https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/freeaddrinfo.3.html
     #if defined __APPLE__ && defined __MACH__ //https://github.com/mp3guy/Logger2/issues/1
-        hints.ai_flags = AI_PASSIVE || SOCK_NONBLOCK; //||
+    hints.ai_flags = AI_PASSIVE || SOCK_NONBLOCK;// || SOL_SOCKET || SO_REUSEADDR; //||
     #else
         hints.ai_flags = SOCK_NONBLOCK;
     #endif
@@ -105,9 +106,8 @@ int server() {
     //**** //snprintf(data, sizeof data,"%s %s", headers, html(), CSSFILE?); ****
     int sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
     bind(sockfd, server->ai_addr, server->ai_addrlen);
-    listen(sockfd, 10);
     printf("listening PORT");
-
+    listen(sockfd, 1000);
     while(1) {
         int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
         if (client_fd > 0) {
@@ -117,11 +117,19 @@ int server() {
             fflush(stdout);
             n = write(client_fd, data, strlen(data));
             close(client_fd);
+//            if(getchar()){
+//            printf("Error\n");
+//                close(sockfd);
+//                break;
+            //}
         }
     }
  return (EXIT_SUCCESS);
 }
 int main(int argc, char** argv){
+
     server();
+
+
     return 0;
 }
