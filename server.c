@@ -71,17 +71,18 @@ int server() {
     struct addrinfo hints, *server;
     memset(&hints, 0, sizeof hints);
     hints.ai_family =  AF_INET;
+    //https://www.ibm.com/docs/en/i/7.1?topic=sscaaiic-example-accepting-connections-from-both-ipv6-ipv4-clients
     hints.ai_socktype = SOCK_STREAM;
     //hints.ai_flags = AI_PASSIVE || SOCK_NONBLOCK;
     //https://www.i-programmer.info/programming/cc/9993-c-sockets-no-need-for-a-web-server.html?start=2
     //hints.ai_flags = AI_PASSIVE
     //https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/freeaddrinfo.3.html
     #if defined __APPLE__ && defined __MACH__ //https://github.com/mp3guy/Logger2/issues/1
-        hints.ai_flags = AI_PASSIVE | SOCK_NONBLOCK; //||
+        hints.ai_flags = AI_PASSIVE || SOCK_NONBLOCK; //||
     #else
         hints.ai_flags = SOCK_NONBLOCK;
     #endif
-    
+
     char* grepetcom = NULL; //www.grepet.com
     getaddrinfo(grepetcom, "80", &hints, &server);
     // you cant run below 1024 as normal user. only as root can you run port 80 on ubuntu. bind is failing with no error message in logic. if port 80 run as sudo ./server on ubuntu
@@ -105,6 +106,7 @@ int server() {
     int sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
     bind(sockfd, server->ai_addr, server->ai_addrlen);
     listen(sockfd, 10);
+    printf("listening PORT");
 
     while(1) {
         int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
