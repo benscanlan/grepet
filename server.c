@@ -106,9 +106,11 @@ int server() {
     //**** //snprintf(data, sizeof data,"%s %s", headers, html(), CSSFILE?); ****
     int sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
     bind(sockfd, server->ai_addr, server->ai_addrlen);
-    printf("listening PORT");
-    listen(sockfd, 1000);
-    while(1) {
+        printf("%s", "listening PORT");
+    
+    listen(sockfd, 10);
+    
+    //while(1) {
         int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
         if (client_fd > 0) {
             int n = read(client_fd, buffer, 2048);
@@ -116,13 +118,16 @@ int server() {
             printf("%s", buffer);
             fflush(stdout);
             n = write(client_fd, data, strlen(data));
+            shutdown(client_fd, SHUT_RDWR);
             close(client_fd);
 //            if(getchar()){
 //            printf("Error\n");
 //                close(sockfd);
 //                break;
             //}
-        }
+            shutdown(sockfd, SHUT_RDWR);
+            close(sockfd);
+        //}
     }
  return (EXIT_SUCCESS);
 }
