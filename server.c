@@ -18,7 +18,6 @@
 #include <fcntl.h>
 # define SOCK_NONBLOCK O_NONBLOCK
 #endif
-#include <stdio.h>
 #include <stdbool.h>
 
 
@@ -78,11 +77,12 @@ int server() {
     //https://www.i-programmer.info/programming/cc/9993-c-sockets-no-need-for-a-web-server.html?start=2
     //hints.ai_flags = AI_PASSIVE
     //https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/freeaddrinfo.3.html
-    #if defined __APPLE__ && defined __MACH__ //https://github.com/mp3guy/Logger2/issues/1
-    hints.ai_flags = AI_PASSIVE || SOCK_NONBLOCK;// || SOL_SOCKET || SO_REUSEADDR; //||
-    #else
-        hints.ai_flags = SOCK_NONBLOCK;
-    #endif
+    //#if defined __APPLE__ && defined __MACH__
+    //https://github.com/mp3guy/Logger2/issues/1
+    hints.ai_flags = AI_PASSIVE || SOCK_NONBLOCK || SOL_SOCKET || SO_REUSEADDR; //||
+    //#else
+        //hints.ai_flags = SOCK_NONBLOCK;
+    //#endif
 
     char* grepetcom = NULL; //www.grepet.com
     getaddrinfo(grepetcom, "80", &hints, &server);
@@ -105,36 +105,36 @@ int server() {
     snprintf(data, sizeof data,"%s %s", headers, html());
     //**** //snprintf(data, sizeof data,"%s %s", headers, html(), CSSFILE?); ****
     int sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
-    bind(sockfd, server->ai_addr, server->ai_addrlen);
-        printf("%s", "listening PORT");
-    
-    listen(sockfd, 10);
-    
-    //while(1) {
-        int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
-        if (client_fd > 0) {
-            int n = read(client_fd, buffer, 2048);
-            //printf("%d", n);
-            printf("%s", buffer);
-            fflush(stdout);
-            n = write(client_fd, data, strlen(data));
-            shutdown(client_fd, SHUT_RDWR);
-            close(client_fd);
-//            if(getchar()){
-//            printf("Error\n");
-//                close(sockfd);
-//                break;
-            //}
-            shutdown(sockfd, SHUT_RDWR);
-            close(sockfd);
-        //}
+    int g = bind(sockfd, server->ai_addr, server->ai_addrlen);
+    printf("%d\n", g);
+    //if (g = 0){
+      listen(sockfd, 10);
+      while(1) {
+          int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
+          if (client_fd > 0) {
+              int n = read(client_fd, buffer, 2048);
+              //printf("%d", n);
+              printf("%s", buffer);
+              fflush(stdout);
+              n = write(client_fd, data, strlen(data));
+              //shutdown(client_fd, SHUT_RDWR);
+              close(client_fd);
+              }
+  //            if(getchar()){
+  //            printf("Error\n");
+  //                close(sockfd);
+  //                break;
+            //  }
+          //}
     }
- return (EXIT_SUCCESS);
+  //}
+    //else {
+    shutdown(sockfd, SHUT_RDWR);
+    close(sockfd);
+    return 0;
+    //}
 }
 int main(int argc, char** argv){
-
     server();
-
-
     return 0;
 }
