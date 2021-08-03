@@ -25,6 +25,7 @@ sudo lsof -Pi tcp:80 | head -3
 sudo tcpdump port 80 #command works just slow to generate traffic data 
 git commit -a
 git push
+curl localhost/?[1-20]
 ```
 open browser navigate to loopback http://127.0.0.1/hello
 
