@@ -1,6 +1,16 @@
-# What is it?
+# grepet goal
+The goal is to create a web app server as one compiled binary.
+Amazon, google all started this way. It's kind of the best kept secret in the valley.
+The big feasibility problem I’ve encountered is updates while running.
 
-A README is a text file that introduces and explains a project. It contains information that is commonly required to understand what the project is about.
+##Notes
+Too small insecure to open source right now.
+We could even provide precompiled binaries for people to download 🤯
+Cake bit is making changes in experimental branch for grepet on GitHub if you want to take a look… Branches the best way to suggest changes. It’s so small, branch and then just paste in the changes is fine.
+You can serve a binary for people to run in the browser using wasm. So sky is the limit.
+
+##Structure
+The code structure is pretty simple. One file. Add functions. Server() get() post() read() write() etc
 
 ## Why should I make it?
 
@@ -22,7 +32,7 @@ cd grepet
 make
 sudo ./server #you cant run below 1024 as normal user. only as root can you run port 80 on ubuntu. bind is failing with no error message in logic. if port 80 run as sudo ./server on ubuntu
 sudo lsof -Pi tcp:80 | head -3
-sudo tcpdump port 80 #command works just slow to generate traffic data 
+sudo tcpdump port 80 #command works just slow to generate traffic data
 git commit -a
 git push
 curl localhost/?[1-20]
@@ -50,8 +60,8 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate. Just kidding, we are using a compiled language so we don't need a ton of tests.
 
-## NEED TO DO'S
-server() Make sure this actually works not just over local loopback. Make a test server at home using any system like laptop with port forward open to 80 on router and open port on system.
+## Testing
+Make sure big changes actually work not just over local loopback. Make a test server at home using any system like laptop with port forward open to 80 on router and open port on system.
 
 routehandler() Needs to be able to get a route and return correct file.
 
