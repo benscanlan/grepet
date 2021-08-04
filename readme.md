@@ -1,13 +1,11 @@
-# grepet goal
+# What is Grepet?
+
+Grepet is a light-weight HTTP server written in C.
+
+## grepet goal
 The goal is to create a web app server as one compiled binary.
 Amazon, google all started this way. It's kind of the best kept secret in the valley.
 The big feasibility problem I’ve encountered is updates while running.
-
-##Notes
-Too small insecure to open source right now.
-We could even provide precompiled binaries for people to download 🤯
-Cake bit is making changes in experimental branch for grepet on GitHub if you want to take a look… Branches the best way to suggest changes. It’s so small, branch and then just paste in the changes is fine.
-You can serve a binary for people to run in the browser using wasm. So sky is the limit.
 
 ##Structure
 The code structure is pretty simple. One file. Add functions. Server() get() post() read() write() etc
@@ -64,6 +62,12 @@ Please make sure to update tests as appropriate. Just kidding, we are using a co
 Make sure big changes actually work not just over local loopback. Make a test server at home using any system like laptop with port forward open to 80 on router and open port on system.
 
 routehandler() Needs to be able to get a route and return correct file.
+
+##Notes
+Too small insecure to open source right now.
+We could even provide precompiled binaries for people to download 🤯
+Cake bit is making changes in experimental branch for grepet on GitHub if you want to take a look… Branches the best way to suggest changes. It’s so small, branch and then just paste in the changes is fine.
+You can serve a binary for people to run in the browser using wasm. So sky is the limit.
 
 ### Copyright
 © 2021 grepet.com All Rights Reserved
