@@ -2,10 +2,11 @@
 
 Grepet is a light-weight HTTP server written in C.
 
-## grepet goal
-The goal is to create a web app server as one compiled binary.
+## Grepet goal
+The goal is to create a social web app server as one compiled binary.
 Amazon, google all started this way. It's kind of the best kept secret in the valley.
 The big feasibility problem I’ve encountered is updates while running.
+May have to use UBUNTU IPTables command into a TCP load balancer in production.
 
 ##Structure
 The code structure is pretty simple. One file. Add functions. Server() get() post() read() write() etc
