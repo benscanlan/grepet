@@ -44,17 +44,25 @@ int server() {
     setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,0,sizeof(int));//1
     int g = bind(sockfd, server->ai_addr, server->ai_addrlen);
     printf("%d\n",g);
+    if (g < 0) { return 0; }
     listen(sockfd, 1); //blocking
-    int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
-    if (client_fd > 0) {
-        read(client_fd, buffer, 2048);
-        close(sockfd);
-        fflush(stdout);
-        send(client_fd, data, strlen(data),0);
-      }
+    // int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
+    // read(client_fd, buffer, 2048);
+    // close(sockfd);
+    // fflush(stdout);
+    // send(client_fd, data, strlen(data),0);
+    // close(client_fd);
+
+
+  int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
+  pid = fork();
+    close(sockfd);
+    read(client_fd, buffer, 2048);
+    send(client_fd, data, strlen(data),0);
+    exit(0);
     close(client_fd);
+    signal(SIGCHLD,SIG_IGN);
     return 0;
-    //}
 }
 int main(int argc, char** argv){
     server();
