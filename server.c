@@ -1,3 +1,4 @@
+//https://hea-www.harvard.edu/~fine/Tech/addrinuse.html
 //input output
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,28 +42,23 @@ int server() {
     char data[2048] = {0};
     snprintf(data, sizeof data,"%s %s", headers, html());
     int sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
-    setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,0,sizeof(int));//1
+    setsockopt(sockfd,SOCK_NONBLOCK ,SO_REUSEADDR,0,sizeof(int));//1
     int g = bind(sockfd, server->ai_addr, server->ai_addrlen);
     printf("%d\n",g);
     if (g < 0) { return 0; }
     listen(sockfd, 1); //blocking
-    // int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
-    // read(client_fd, buffer, 2048);
-    // close(sockfd);
-    // fflush(stdout);
-    // send(client_fd, data, strlen(data),0);
-    // close(client_fd);
-
-
-  int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
-  pid = fork();
-    close(sockfd);
+    int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
     read(client_fd, buffer, 2048);
+    fflush(stdout);
     send(client_fd, data, strlen(data),0);
-    exit(0);
+    shutdown(sockfd, SHUT_WR);
+    close(sockfd);
+
+
     close(client_fd);
-    signal(SIGCHLD,SIG_IGN);
     return 0;
+
+
 }
 int main(int argc, char** argv){
     server();
