@@ -44,7 +44,6 @@ int server() {
     setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,0,sizeof(int));//1
     int g = bind(sockfd, server->ai_addr, server->ai_addrlen);
     printf("%d\n",g);
-    system("curl localhost");
     listen(sockfd, 1); //blocking
     int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
     if (client_fd > 0) {

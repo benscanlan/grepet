@@ -41,8 +41,6 @@ open browser navigate to loopback http://127.0.0.1/hello
 curl localhost/?[1-20]
 while true; do <your_command>; sleep <interval_in_seconds>; done
 
-
-
 ## undo local changes
 git fetch --all
 git reset --hard origin/master
