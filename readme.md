@@ -38,6 +38,9 @@ curl localhost/?[1-20]
 ```
 open browser navigate to loopback http://127.0.0.1/hello
 
+## undo local changes
+git fetch --all
+git reset --hard origin/master
 
 ## Server Technology
 
