@@ -66,6 +66,8 @@ int readfile() {
     return 0;
 }
 
+
+
 int server() {
 
     struct addrinfo hints, *server;
@@ -79,10 +81,7 @@ int server() {
     //https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/freeaddrinfo.3.html
     //#if defined __APPLE__ && defined __MACH__
     //https://github.com/mp3guy/Logger2/issues/1
-    hints.ai_flags = AI_PASSIVE || SOCK_NONBLOCK || SOL_SOCKET || SO_REUSEADDR; //||
-    //#else
-        //hints.ai_flags = SOCK_NONBLOCK;
-    //#endif
+    hints.ai_flags = SOCK_NONBLOCK || SO_REUSEADDR; //||
 
     char* grepetcom = NULL; //www.grepet.com
     getaddrinfo(grepetcom, "80", &hints, &server);
@@ -94,7 +93,7 @@ int server() {
 
     struct sockaddr_storage client_addr;
     socklen_t addr_size = sizeof client_addr;
-    char headers[] = "HTTP/1.0 200 OK\r\nServer: CPi\r\nContent-type:text/html\r\n\r\n";
+    char headers[] = "HTTP/1.0 200 OK\r\nServer: Grepet\r\nContent-type:text/html\r\n\r\n";
     char buffer[2048];
     //printf("%s", rs());
     //char html[1000] = "<p>";
@@ -105,32 +104,33 @@ int server() {
     snprintf(data, sizeof data,"%s %s", headers, html());
     //**** //snprintf(data, sizeof data,"%s %s", headers, html(), CSSFILE?); ****
     int sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
+   
+    setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,0,sizeof(int));//1
+    
+    
     int g = bind(sockfd, server->ai_addr, server->ai_addrlen);
     printf("%d\n", g);
     //if (g = 0){
       listen(sockfd, 10);
-      //while(1) {
+      while(1) {
           int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
           if (client_fd > 0) {
               int n = read(client_fd, buffer, 2048);
               //printf("%d", n);
               printf("%s", buffer);
               fflush(stdout);
-              n = write(client_fd, data, strlen(data));
+              n = send(client_fd, data, strlen(data),0);
+              printf("%d", n);
+              // hangs on write() socket bug here
+              printf("%s", data);
               //shutdown(client_fd, SHUT_RDWR);
-              close(client_fd);
+              printf("buffer!!!!");
               }
-  //            if(getchar()){
-  //            printf("Error\n");
-  //                close(sockfd);
-  //                break;
-            //  }
-          //}
-    //}
-  //}
-    //else {
-    //shutdown(sockfd, SHUT_RDWR);
+          close(client_fd);
+      }
     close(sockfd);
+    
+     
     return 0;
     //}
 }
