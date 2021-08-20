@@ -34,7 +34,7 @@ int server() {
     memset(&hints, 0, sizeof hints);
     hints.ai_family =  AF_INET;
     hints.ai_socktype = SOCK_STREAM;
-    hints.ai_flags = SO_LINGER; //SOCK_NONBLOCK || SO_REUSEADDR; //|| //unused
+    //hints.ai_flags = SO_LINGER; //SOCK_NONBLOCK || SO_REUSEADDR; //|| //unused
 
     char* grepetcom = NULL; //www.grepet.com
     getaddrinfo(grepetcom, "80", &hints, &server); //run as sudo 80
@@ -51,8 +51,9 @@ int server() {
     struct linger sl;
     sl.l_onoff=1;
     sl.l_linger=0;
-    setsockopt(sockfd,SOL_SOCKET, SO_LINGER,&sl,sizeof(sl));
-
+    //SO_LINGER
+    setsockopt(sockfd,SOL_SOCKET, SO_REUSEADDR,&sl,sizeof(sl));
+    //setblocking(sockfd,0);
     int g = bind(sockfd, server->ai_addr, server->ai_addrlen);
     printf("%d\n",g);
     if (g < 0) { return 0; }
@@ -63,7 +64,7 @@ int server() {
     send(client_fd, data, strlen(data),0);
     fflush(stdout);
     //shutdown(sockfd, SHUT_WR);
-    close(client_fd);
+    //close(client_fd);
     close(sockfd);
 
 
