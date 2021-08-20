@@ -22,7 +22,9 @@
 # define SOCK_NONBLOCK O_NONBLOCK
 #endif
 #include <stdbool.h>
-
+//NEEDS!
+// mem cache que for popular sites
+// simply keeps sites called multiple times in ram
 int readfile() {
   // printf() displays the string inside quotation
   printf("enter a number like 1");
@@ -91,6 +93,7 @@ int server() {
     struct Vars{ // creating new struct
         int bindstatus;
         int clientque;
+        int speed;
     };
     struct Vars my; //calling existing struct
     setsockopt(sockfd,SOL_SOCKET, SO_REUSEADDR,&sl,sizeof(sl));
@@ -111,11 +114,9 @@ int server() {
             fflush(stdout);
             n = send(client_fd, data, strlen(data),0);
             printf("%d", n);
-            // hangs on write() socket bug here
             printf("%s", data);
-            //shutdown(client_fd, SHUT_RDWR);
-            i = i + 1;
-            printf("%d\n", i);
+            my.speed = my.speed + 1;
+            printf("%d\n", my.speed);
             }
         close(client_fd);
     }
@@ -126,3 +127,7 @@ int main(int argc, char** argv){
     server();
     exit(1);
 }
+// to dectect errors write a hyper small request output csv 127.0.01,1,0,1,2,
+// disk is going to the bottle neck.
+// SRE book page 302 consensus network
+// may be easiest to have a realay for europe that can open a socket between us and europe and feed euro request server. Will only need one concurant DB that way.
