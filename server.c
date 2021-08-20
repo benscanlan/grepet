@@ -25,7 +25,7 @@
 //NEEDS!
 // mem cache que for popular sites
 // simply keeps sites called multiple times in ram
-int readfile() {
+int readfile() { //needs to constantly look for and remove bad data that can cause read issues
   // printf() displays the string inside quotation
   printf("enter a number like 1");
   char buf[10];
@@ -72,7 +72,7 @@ int server() {
     memset(&hints, 0, sizeof hints);
     hints.ai_family =  AF_INET;
     hints.ai_socktype = SOCK_STREAM;
-    //hints.ai_flags = SO_LINGER; //SOCK_NONBLOCK || SO_REUSEADDR; //|| //unused
+    //hints.ai_flags = //unused
 
     char* grepetcom = NULL; //www.grepet.com
     getaddrinfo(grepetcom, "80", &hints, &server); //run as sudo 80
@@ -83,8 +83,6 @@ int server() {
     char data[2048] = {0};
     snprintf(data, sizeof data,"%s %s", headers, html());
     int sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
-    //setsockopt(sockfd,SOCK_NONBLOCK ,SO_REUSEADDR,0,sizeof(int));//1
-    //setsockopt(sockfd,SOCK_NONBLOCK ,SO_LINGER,0,sizeof(int));//1
     //int setsockopt(int socket, int level, int option_name,const void *option_value, socklen_t option_len);
     struct linger sl; //calling existing struct
     sl.l_onoff=1;
