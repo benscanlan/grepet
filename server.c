@@ -84,16 +84,22 @@ int server() {
     //setsockopt(sockfd,SOCK_NONBLOCK ,SO_REUSEADDR,0,sizeof(int));//1
     //setsockopt(sockfd,SOCK_NONBLOCK ,SO_LINGER,0,sizeof(int));//1
     //int setsockopt(int socket, int level, int option_name,const void *option_value, socklen_t option_len);
-    struct linger sl;
+    struct linger sl; //calling existing struct
     sl.l_onoff=1;
     sl.l_linger=0;
     //SO_LINGER
+    struct Vars{ // creating new struct
+        int bindstatus;
+        int clientque;
+    };
+    struct Vars my; //calling existing struct
     setsockopt(sockfd,SOL_SOCKET, SO_REUSEADDR,&sl,sizeof(sl));
     //setblocking(sockfd,0);
-    int g = bind(sockfd, server->ai_addr, server->ai_addrlen);
-    printf("%d\n",g);
-    if (g < 0) { return 0; }
-    listen(sockfd, 1); //blocking
+    my.bindstatus = bind(sockfd, server->ai_addr, server->ai_addrlen);
+    printf("%d\n",my.bindstatus);
+    if (my.bindstatus < 0) { return 0; }
+    my.clientque = 128;
+    listen(sockfd, my.clientque);
     int i = 0;
     while(1) {
         
@@ -109,7 +115,7 @@ int server() {
             printf("%s", data);
             //shutdown(client_fd, SHUT_RDWR);
             i = i + 1;
-            printf("%d", i);
+            printf("%d\n", i);
             }
         close(client_fd);
     }
