@@ -63,16 +63,8 @@ int server() {
     fflush(stdout);
     send(client_fd, data, strlen(data),0);
     fflush(stdout);
-    //shutdown(sockfd, SHUT_WR);
-    //close(client_fd);
     close(sockfd);
-
-
-    //close(client_fd);
-    //shutdown(1,1);
     return 0;
-
-
 }
 int main(int argc, char** argv){
     server();
