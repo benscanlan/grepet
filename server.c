@@ -23,6 +23,42 @@
 #endif
 #include <stdbool.h>
 
+int readfile() {
+  // printf() displays the string inside quotation
+  printf("enter a number like 1");
+  char buf[10];
+  fgets(buf,10,stdin);
+  printf("%s", buf);
+  //takes newline out of buffer read in https://stackoverflow.com/questions/2693776
+  buf[strcspn(buf, "\n")] = 0;
+  //int article = 1;
+  //returns a filecontents
+  FILE *filePointer ;
+  char dataToBeRead[50]; // can ask for size ahead of time of file for best memory ussage
+  char route[80];
+  strcpy (route, "./articles/");
+  strcat (route, buf);
+  strcat (route, ".html");
+  printf("%s", route);
+  filePointer = fopen(route, "r") ;
+
+  //check if the file pointer is null if null route cannot be resolved send 404 page error code
+  if ( filePointer == NULL ) {
+    printf( "404 file failed to open." ) ;
+    }
+  else {
+      //The file is now opened
+      while( fgets ( dataToBeRead, 50, filePointer ) != NULL ) { // using fgets() method fgets line by line
+         printf( "%s" , dataToBeRead ) ; // Print the dataToBeRead
+         }
+        fclose(filePointer) ;
+        //the file is now closed
+    }
+    return 0;
+}
+
+
+
 const char* html(){
   char* html = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
   return html;
@@ -58,11 +94,25 @@ int server() {
     printf("%d\n",g);
     if (g < 0) { return 0; }
     listen(sockfd, 1); //blocking
-    int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
-    read(client_fd, buffer, 2048);
-    fflush(stdout);
-    send(client_fd, data, strlen(data),0);
-    fflush(stdout);
+    int i = 0;
+    while(1) {
+        
+        int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
+        if (client_fd > 0) {
+            int n = read(client_fd, buffer, 2048);
+            //printf("%d", n);
+            printf("%s", buffer);
+            fflush(stdout);
+            n = send(client_fd, data, strlen(data),0);
+            printf("%d", n);
+            // hangs on write() socket bug here
+            printf("%s", data);
+            //shutdown(client_fd, SHUT_RDWR);
+            i = i + 1;
+            printf("%d", i);
+            }
+        close(client_fd);
+    }
     close(sockfd);
     return 0;
 }
