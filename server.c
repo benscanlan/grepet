@@ -2,6 +2,7 @@
 // goal build functionality like service httpd graceful restart not loose conections
 //A graceful restart tells the web sever to finish any active connections before restarting thats all tho
 //input output
+//change
 #include <stdio.h>
 #include <stdlib.h>
 //data types
