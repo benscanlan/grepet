@@ -2,7 +2,6 @@
 // goal build functionality like service httpd graceful restart not loose conections
 //A graceful restart tells the web sever to finish any active connections before restarting thats all tho
 //input output
-//change
 #include <stdio.h>
 #include <stdlib.h>
 //data types
@@ -126,7 +125,4 @@ int main(int argc, char** argv){
     server();
     exit(1);
 }
-// to dectect errors write a hyper small request output csv 127.0.01,1,0,1,2,
-// disk is going to the bottle neck.
-// SRE book page 302 consensus network
-// may be easiest to have a realay for europe that can open a socket between us and europe and feed euro request server. Will only need one concurant DB that way.
+
