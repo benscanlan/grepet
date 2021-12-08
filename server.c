@@ -109,41 +109,53 @@ int server() {
 
             // printf("%d\n", request_size);
             // printf("%d\n", client_fd);
-            //printf("%s\n", buffer);
-            
+            printf("%s\n", buffer);
+            // 
             //get first line of buffer
+            char request_line1[512];
             for(int i = 0; i < strlen(buffer); i++)
             {
                 if (buffer[i]== '\n') 
+                {
+                    for(int j=0; j <= i; j++)
                     {
-                        for(int j=0; j <= i; j++)
-                        {
-                            printf("%c", buffer[j]);
-                        }
+                            //printf("%c", buffer[j]);
+                            request_line1[j] = buffer[j];
+                    }
+                    request_line1[i+1]='\0';
                     break;
+                }
+            }
+            printf("%s\n", request_line1);
+            
+            
+            char request_path[256];
+            int i = 0;
+            //if (request_line1[i]=='G' && request_line1[i+1]=='E' && request_line1[i+2]=='T' && request_line1[i+3]==' ')
+            int start = 0;
+            int end = 0;
+            for(int i = 0; i < strlen(request_line1); i++)
+            {
+                if (buffer[i]== ' ')
+                {
+                    start = i+1;
+                    for(i=start; i < strlen(request_line1); i++)
+                    {
+                        if (buffer[i]== ' ')
+                        {
+                            end = i-1;
+                        }
+
                     }
                 }
-            //parse buffer for GET /jhjdsfgdgdfsdfds HTTP/1.1
-            //char* new = gets(buffer);
-            //printf("%s\n",new);
-            // char c[1000];
-            // fscanf(*buffer, "%[^\n]", c);
-            // fgets(&buffer, "%[^\n]", c))
-            // printf("Data from the file:\n%s", c);
+            }
 
-            //printf("%s", getline(buffer,0));
-
-            // uint8_t *card_data = buffer;
-          
-
-            //         printf("%lu,\n",strlen(buffer));
-            //         printf("%d,\n",i);
-
-            //         if (buffer[i]=='G' && buffer[i+1]=='E' && buffer[i+2]=='T')
-            //             printf("%s,\n","found");
-            //             break; 
-            //      }
-            // printf("%s\n", readline(buffer));
+            for(int j = start; j <= end; j++)
+            {
+                request_path[j-4] = request_line1[j];
+            }
+            request_path[end-3]='\0';
+            printf("%s\n", request_path);
             
             fflush(stdout);
             int response_size = send(client_fd, data, strlen(data),0);
