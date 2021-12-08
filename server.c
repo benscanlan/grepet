@@ -104,20 +104,37 @@ int server() {
         int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
         if (client_fd > 0) {
             int request_size = read(client_fd, buffer, 2048);
+
+
+
             // printf("%d\n", request_size);
             // printf("%d\n", client_fd);
-            // printf("%s\n", buffer);
+            //printf("%s\n", buffer);
+            
+            //get first line of buffer
+            for(int i = 0; i < strlen(buffer); i++)
+            {
+                if (buffer[i]== '\n') 
+                    {
+                        for(int j=0; j <= i; j++)
+                        {
+                            printf("%c", buffer[j]);
+                        }
+                    break;
+                    }
+                }
             //parse buffer for GET /jhjdsfgdgdfsdfds HTTP/1.1
-            char* new = gets(buffer);
-            printf("%s\n",new);
+            //char* new = gets(buffer);
+            //printf("%s\n",new);
+            // char c[1000];
+            // fscanf(*buffer, "%[^\n]", c);
+            // fgets(&buffer, "%[^\n]", c))
+            // printf("Data from the file:\n%s", c);
 
             //printf("%s", getline(buffer,0));
 
             // uint8_t *card_data = buffer;
-            // for(int i = 0; i < strlen(buffer); i++)
-            //      {
-            //         if ( (buffer)[i]== '\n') ) 
-            //             for 0 to i 
+          
 
             //         printf("%lu,\n",strlen(buffer));
             //         printf("%d,\n",i);
@@ -129,8 +146,7 @@ int server() {
             // printf("%s\n", readline(buffer));
             
             fflush(stdout);
-            int n = 0;
-            n = send(client_fd, data, strlen(data),0);
+            int response_size = send(client_fd, data, strlen(data),0);
             //printf("%d", n);
             //printf("%s", data);
             my.speed = my.speed + 1;
