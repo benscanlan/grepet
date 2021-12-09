@@ -18,7 +18,7 @@
 # define SOCK_NONBLOCK O_NONBLOCK
 #endif
 #include <stdbool.h>
-
+//
 const char* html(){
   char* html = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
   return html;
