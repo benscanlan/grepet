@@ -60,7 +60,6 @@ int server() {
     listen(sockfd, my.clientque);
     my.speed = 0;
     while(1) {
-        
         int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
         if (client_fd > 0) {
             int request_size = read(client_fd, buffer, 2048);
@@ -88,6 +87,9 @@ int server() {
 }
 int main(int argc, char** argv){
     server();
+    printf("calltest");
+//#include <pthread.h>https://www.geeksforgeeks.org/multithreading-c-2/
     exit(1);
+		
 }
 
