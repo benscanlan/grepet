@@ -134,4 +134,4 @@ In the future we'll probably offer pre-compiled binary in the [releases](https:/
 You can serve a binary for people to run in the browser using wasm. So sky is the limit.
 
 # Copyright
-©2022 [grepet.com](grepet.com) All Rights Reserved
+©2021-2022 [grepet.com](grepet.com) All Rights Reserved
