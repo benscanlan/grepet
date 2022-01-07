@@ -2,22 +2,32 @@
 
 Grepet is a light-weight HTTP server written in C.
 
-## Grepet goal
-The goal is to create a social web app server as one compiled binary.
+# Grepet goal
+The goal is to create a social web app and server as one compiled binary.
 Amazon, google all started this way. It's kind of the best kept secret in the valley.
 The big feasibility problem I’ve encountered is updates while running.
 May have to use NGINX or UBUNTU IPTables command as a TCP load balancer in production.
 
-##Structure
+#Structure
 The code structure is pretty simple. One file. Add functions. Server() get() post() read() write() etc
 
-## Why should I make it?
 
-It's an easy way to answer questions that your [audience](https://en.wikipedia.org/wiki/Audience) will likely have regarding how to install and use your project and also how to collaborate with you.
-
-## Usage
-open terminal and the type following.
-###About remote repositories
+#Server Setup
+```
+sudo apt install nvidia-driver-455
+xdg-open /etc/apt/sources.list
+sudo apt-get install geekbench5
+cd Geekbench-5.4.1-Linux/
+./geekbench5
+sudo apt install openssh-server
+sudo systemctl status ssh
+sudo ufw allow ssh
+ip a
+whoami
+sudo systemctl enable --now ssh
+ssh ben@10.0.1.6
+```
+#About remote repositories
 You can only push to two types of URL addresses:
 An HTTPS URL like https://github.com/user/repo.git
 An SSH URL, like git@github.com:user/repo.git
@@ -73,15 +83,15 @@ git push
 ```
 open browser navigate to loopback http://127.0.0.1/hello
 
-## Testing
+# Testing
 curl localhost/?[1-20]
 while true; do <your_command>; sleep <interval_in_seconds>; done
 
-## undo local changes
+# undo local changes
 git fetch --all
 git reset --hard origin/master
 
-## Server Technology
+# Server Technology
 
 ```c
 #include <sys/socket.h>
@@ -96,21 +106,21 @@ server()    {
 }
 ```
 
-## Contributing
+# Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate. Just kidding, we are using a compiled language so we don't need a ton of tests.
 
-## Testing
+# Testing
 Make sure big changes actually work not just over local loopback. Make a test server at home using any system like laptop with port forward open to 80 on router and open port on system.
 
 routehandler() Needs to be able to get a route and return correct file.
 
-##Notes
+#Notes
 Too small insecure to open source right now.
 We could even provide precompiled binaries for people to download 🤯
 Cake bit is making changes in experimental branch for grepet on GitHub if you want to take a look… Branches the best way to suggest changes. It’s so small, branch and then just paste in the changes is fine.
 You can serve a binary for people to run in the browser using wasm. So sky is the limit.
 
-### Copyright
+# Copyright
 © 2021 grepet.com All Rights Reserved
