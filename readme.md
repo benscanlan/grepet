@@ -8,11 +8,13 @@ Amazon, google all started this way. It's kind of the best kept secret in the va
 The big feasibility problem I’ve encountered is updates while running.
 May have to use NGINX or UBUNTU IPTables command as a TCP load balancer in production.
 
-#Structure
+# Structure
+
 The code structure is pretty simple. One file. Add functions. Server() get() post() read() write() etc
 
 
-#Server Setup
+# Server Setup
+
 ```
 sudo apt install nvidia-driver-455
 xdg-open /etc/apt/sources.list
@@ -27,9 +29,12 @@ whoami
 sudo systemctl enable --now ssh
 ssh ben@10.0.1.6
 ```
-#About remote repositories
+# About remote repositories
+
 You can only push to two types of URL addresses:
+
 An HTTPS URL like https://github.com/user/repo.git
+
 An SSH URL, like git@github.com:user/repo.git
 
 ```
@@ -38,25 +43,33 @@ cd Github
 git clone https://github.com/benscanlan/grepet 
 ```
 if private:
+
 Username: your_username
+
 Password: your_token
 ```
 cd grepet
 git remote add origin  <REMOTE_URL> 
 ```
 MAKE A CHANGE
+
 finder > go > connect to server
+
 sftp://ben@10.0.1.6
 ```
 git commit -am "update git readme how to"
 git push
 ```
 Username for 'https://github.com': benscanlan
+
 Password for 'https://benscanlan@github.com': 
 
 You can use the command 'git remote set-url' to change a remote's URL.
+
 HTTPS or SSL: https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories
+
 HTTPS Tokens: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+
 Tokens: https://github.com/settings/tokens
 
 Premium FTP client for MacOS
