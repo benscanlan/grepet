@@ -47,6 +47,7 @@ Password for 'https://benscanlan@github.com':
 You can use the command 'git remote set-url' to change a remote's URL.
 HTTPS or SSL: https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories
 HTTPS Tokens: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+Tokens: https://github.com/settings/tokens
 
 Premium FTP client for MacOS
 Transmit is a freemium FTP client that's been designed specifically with Mac computers in mind. You can avail of its service for free for seven days but afterward, you will be required to purchase its one-time pay license in order to continue using the platform. Here, you can upload, download and manage all of your files on tons of servers with so much ease.
