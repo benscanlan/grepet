@@ -94,7 +94,7 @@ sudo tcpdump port 80 #command works just slow to generate traffic data
 git commit -a
 git push
 ```
-open browser navigate to loopback http://127.0.0.1/hello
+open browser navigate to loopback [http://127.0.0.1/hello](http://127.0.0.1/hello)
 
 # Testing
 curl localhost/?[1-20]
@@ -129,11 +129,10 @@ Make sure big changes actually work not just over local loopback. Make a test se
 
 routehandler() Needs to be able to get a route and return correct file.
 
-#Notes
+# Notes
 Too small insecure to open source right now.
-We could even provide precompiled binaries for people to download 🤯
-Cake bit is making changes in experimental branch for grepet on GitHub if you want to take a look… Branches the best way to suggest changes. It’s so small, branch and then just paste in the changes is fine.
+In the future we'll probably offer pre-compiled binary in the [releases](https://github.com/benscanlan/grepet/releases) page.
 You can serve a binary for people to run in the browser using wasm. So sky is the limit.
 
 # Copyright
-© 2021 grepet.com All Rights Reserved
+©2022 [grepet.com](grepet.com) All Rights Reserved
