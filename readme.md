@@ -130,7 +130,6 @@ Make sure big changes actually work not just over local loopback. Make a test se
 routehandler() Needs to be able to get a route and return correct file.
 
 # Notes
-Too small insecure to open source right now.
 In the future we'll probably offer pre-compiled binary in the [releases](https://github.com/benscanlan/grepet/releases) page.
 You can serve a binary for people to run in the browser using wasm. So sky is the limit.
 
