@@ -34,6 +34,16 @@ Password: your_token
 cd grepet
 git remote add origin  <REMOTE_URL> 
 ```
+MAKE A CHANGE
+finder > go > connect to server
+sftp://ben@10.0.1.6
+```
+git commit -am "update git readme how to"
+git push
+```
+Username for 'https://github.com': benscanlan
+Password for 'https://benscanlan@github.com': 
+
 You can use the command 'git remote set-url' to change a remote's URL.
 HTTPS or SSL: https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories
 HTTPS Tokens: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
