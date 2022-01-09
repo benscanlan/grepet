@@ -1,3 +1,5 @@
+
+//https://stackoverflow.com/questions/46626660/getaddrinfo-and-inaddr-any
 //input output
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,6 +20,8 @@
 # define SOCK_NONBLOCK O_NONBLOCK
 #endif
 #include <stdbool.h>
+
+
 //
 const char* html(){
   char* html = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
@@ -26,21 +30,10 @@ const char* html(){
 
 
 int server() {
-    struct addrinfo hints, *server;
-    memset(&hints, 0, sizeof hints);
-    hints.ai_family =  AF_INET;
-    hints.ai_socktype = SOCK_STREAM;
-    //hints.ai_flags = //unused
-    char* grepetcom = NULL; //www.grepet.com
-    getaddrinfo(grepetcom, "5432", &hints, &server); //run as sudo 80
-    struct sockaddr_storage client_addr;
-    socklen_t addr_size = sizeof client_addr;
     char headers[] = "HTTP/1.0 200 OK\r\nServer: Grepet\r\nContent-type:text/html\r\n\r\n";
     char buffer[2048];
     char data[2048] = {0};
     snprintf(data, sizeof data,"%s %s", headers, html());
-    int sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
-    //int setsockopt(int socket, int level, int option_name,const void *option_value, socklen_t option_len);
     struct linger sl; //calling existing struct
     sl.l_onoff=1;
     sl.l_linger=0;
@@ -50,15 +43,83 @@ int server() {
         int clientque;
         int speed;
     };
+    
+//    struct addrinfo hints, *server;
+//    memset(&hints, 0, sizeof hints);
+//    hints.ai_family =  AF_INET;
+//    hints.ai_socktype = SOCK_STREAM;
+    struct addrinfo hints;
+    struct addrinfo *server;
+   // memset(&hints, 0, sizeof hints);
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_protocol = IPPROTO_TCP;
+    hints.ai_flags = AI_PASSIVE;
+//
+    struct sockaddr_storage client_addr;
+    socklen_t addr_size = sizeof client_addr;
+
     struct Vars my; //calling existing struct
-    setsockopt(sockfd,SOL_SOCKET, SO_REUSEADDR,&sl,sizeof(sl));
+    my.bindstatus = 1000;
     //setblocking(sockfd,0);
-    my.bindstatus = bind(sockfd, server->ai_addr, server->ai_addrlen);
+
+    //struct addrinfo* result;
+    //int sockfd = 0;
+    
+//    if (getaddrinfo(NULL, "5432", &hints, &server) == 0)
+//    {
+//        for (struct addrinfo *addr = server; addr != NULL; addr = addr->ai_next)
+//        {
+//            sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
+//            if (sockfd < 0) //INVALID_SOCKET on windows
+//            {
+//                setsockopt(sockfd,SOL_SOCKET, SO_REUSEADDR,&sl,sizeof(sl));
+//                my.bindstatus = bind(sockfd, addr->ai_addr, (int)addr->ai_addrlen);
+//                listen(sockfd, my.clientque);
+//                // store listenSocket in a list for later use...
+//            }
+//        }
+//        freeaddrinfo(server);
+//    }
+    //struct addrinfo *addr = server;
+    int sockfd;
+    if (getaddrinfo(NULL, "5432", &hints, &server) == 0)
+        printf("hi");
+    {
+    for (struct addrinfo *addr = server; addr != NULL; addr = addr->ai_next)
+        {
+            printf("hi");
+        sockfd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
+            printf("hi");
+        if (sockfd > 0) //INVALID_SOCKET on windows
+            {
+                printf("hi");
+                setsockopt(sockfd,SOL_SOCKET, SO_REUSEADDR,&sl,sizeof(sl));
+                //addr.sin_addr.s_addr = INADDR_ANY;
+                if ((my.bindstatus = bind(sockfd, addr->ai_addr, (int)addr->ai_addrlen)) != 0)
+                {
+                    perror("can't bind port");
+                    abort();
+                }
+                
+                
+                if ( listen(sockfd, my.clientque)  != 0 )
+                {
+                    perror("Can't configure listening port");
+                    abort();
+                }
+                // store listenSocket in a list for later use...
+            }
+        }
+        freeaddrinfo(server);
+    }
+    
+
     printf("%d\n",my.bindstatus);
     if (my.bindstatus < 0) { return 0; }
     my.clientque = 128;
-    listen(sockfd, my.clientque);
     my.speed = 0;
+    
     while(1) {
         int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
         if (client_fd > 0) {
