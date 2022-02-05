@@ -1,5 +1,11 @@
 
 //https://stackoverflow.com/questions/46626660/getaddrinfo-and-inaddr-any
+
+
+#include "http_parser.h"
+
+// dont want to use strcopy for security reasons?
+
 //input output
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,6 +27,7 @@
 #endif
 #include <stdbool.h>
 
+http_parser_settings settings;
 
 //
 const char* html(){
@@ -28,10 +35,27 @@ const char* html(){
   return html;
   }
 
-
+void myparser(char* buffer_pointer){
+    char str[2048], *s = str, *t = NULL;
+    /*Problem with strcpy(): The strcpy() function does not specify the size of the destination array, so buffer overrun is often a risk. Using strcpy() function to copy a large character array into a smaller one is dangerous, but if the string will fit, then it will not be worth the risk. If the destination string is not large enough to store the source string then the behavior of strcpy() is unspecified or undefined. https://www.geeksforgeeks.org/why-strcpy-and-strncpy-are-not-safe-to-use/*/
+    strcpy(str, buffer_pointer);
+//            while ((t = strtok(s, " ")) != NULL) {
+//                s = NULL;
+//                //PRINTS PARSED REQUEST BODY
+//                 printf("%s\n", t);
+//             }
+    printf("\n");
+    while ((t = strtok(s, "\t\n")) != NULL) {
+        s = NULL;
+        //PRINTS PARSED REQUEST BODY
+        printf("%s\n", t);
+        printf("\n");
+        }
+    }
 int server() {
     char headers[] = "HTTP/1.0 200 OK\r\nServer: Grepet\r\nContent-type:text/html\r\n\r\n";
     char buffer[2048];
+    char *buffer_pointer = &buffer[0];
     char data[2048] = {0};
     snprintf(data, sizeof data,"%s %s", headers, html());
     struct linger sl; //calling existing struct
@@ -96,21 +120,16 @@ int server() {
     
     my.clientque = 128;
     my.speed = 0;
-    
+    //int system(const char *"bash\ test.sh");
+    system("bash test2.sh");
+    printf("hi");
     while(1) {
         int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
         if (client_fd > 0) {
             int request_size = read(client_fd, buffer, 2048);
             // printf("%d\n", request_size);
             // printf("%d\n", client_fd);
-            char str[2048], *s = str, *t = NULL;
-	    
-            strcpy(str, buffer);
-            while ((t = strtok(s, " ")) != NULL) {
-                s = NULL;
-                //PRINTS PARSED REQUEST BODY
-                 printf("%s\n", t);
-             }
+            myparser(buffer_pointer);
             
             fflush(stdout);
             int response_size = send(client_fd, data, strlen(data),0);
