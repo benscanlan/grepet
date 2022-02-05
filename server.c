@@ -44,10 +44,6 @@ int server() {
         int speed;
     };
     
-//    struct addrinfo hints, *server;
-//    memset(&hints, 0, sizeof hints);
-//    hints.ai_family =  AF_INET;
-//    hints.ai_socktype = SOCK_STREAM;
     struct addrinfo hints;
     struct addrinfo *server;
    // memset(&hints, 0, sizeof hints);
@@ -55,7 +51,7 @@ int server() {
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
     hints.ai_flags = AI_PASSIVE;
-//
+
     struct sockaddr_storage client_addr;
     socklen_t addr_size = sizeof client_addr;
 
@@ -63,37 +59,17 @@ int server() {
     my.bindstatus = 1000;
     //setblocking(sockfd,0);
 
-    //struct addrinfo* result;
-    //int sockfd = 0;
-    
-//    if (getaddrinfo(NULL, "5432", &hints, &server) == 0)
-//    {
-//        for (struct addrinfo *addr = server; addr != NULL; addr = addr->ai_next)
-//        {
-//            sockfd = socket(server->ai_family, server->ai_socktype, server->ai_protocol);
-//            if (sockfd < 0) //INVALID_SOCKET on windows
-//            {
-//                setsockopt(sockfd,SOL_SOCKET, SO_REUSEADDR,&sl,sizeof(sl));
-//                my.bindstatus = bind(sockfd, addr->ai_addr, (int)addr->ai_addrlen);
-//                listen(sockfd, my.clientque);
-//                // store listenSocket in a list for later use...
-//            }
-//        }
-//        freeaddrinfo(server);
-//    }
-    //struct addrinfo *addr = server;
     int sockfd;
     if (getaddrinfo(NULL, "5432", &hints, &server) == 0)
-        printf("hi");
+        //printf("test1 pass");
     {
     for (struct addrinfo *addr = server; addr != NULL; addr = addr->ai_next)
-        {
-            printf("hi");
-        sockfd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
-            printf("hi");
-        if (sockfd > 0) //INVALID_SOCKET on windows
+    {
+            //printf("test2 pass");
+            sockfd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
+            //printf("hi");
+        if (sockfd > 0)
             {
-                printf("hi");
                 setsockopt(sockfd,SOL_SOCKET, SO_REUSEADDR,&sl,sizeof(sl));
                 //addr.sin_addr.s_addr = INADDR_ANY;
                 if ((my.bindstatus = bind(sockfd, addr->ai_addr, (int)addr->ai_addrlen)) != 0)
@@ -101,22 +77,23 @@ int server() {
                     perror("can't bind port");
                     abort();
                 }
-                
-                
                 if ( listen(sockfd, my.clientque)  != 0 )
                 {
                     perror("Can't configure listening port");
                     abort();
+                }
+                if ( my.bindstatus == 0 )
+                {
+                    printf("BOUND TO ALL SOCKETS\n");
                 }
                 // store listenSocket in a list for later use...
             }
         }
         freeaddrinfo(server);
     }
-    
-
-    printf("%d\n",my.bindstatus);
+    //further error checking to close program
     if (my.bindstatus < 0) { return 0; }
+    
     my.clientque = 128;
     my.speed = 0;
     
@@ -131,6 +108,7 @@ int server() {
             strcpy(str, buffer);
             while ((t = strtok(s, " ")) != NULL) {
                 s = NULL;
+                //PRINTS PARSED REQUEST BODY
                  printf("%s\n", t);
              }
             
@@ -139,13 +117,15 @@ int server() {
             //printf("%d", n);
             //printf("%s", data);
             my.speed = my.speed + 1;
-            printf("%d\n", my.speed);
+            printf("%d\n requests", my.speed);
             }
         close(client_fd);
     }
     close(sockfd);
     return 0;
 }
+
+
 int main(int argc, char** argv){
     server();
     printf("calltest");
