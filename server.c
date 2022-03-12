@@ -38,7 +38,7 @@ const char* html(){
 void myparser(char* buffer_pointer){
     char str[2048], *s = str, *t = NULL;
     /*Problem with strcpy(): The strcpy() function does not specify the size of the destination array, so buffer overrun is often a risk. Using strcpy() function to copy a large character array into a smaller one is dangerous, but if the string will fit, then it will not be worth the risk. If the destination string is not large enough to store the source string then the behavior of strcpy() is unspecified or undefined. https://www.geeksforgeeks.org/why-strcpy-and-strncpy-are-not-safe-to-use/*/
-    strcpy(str, buffer_pointer);
+    strncpy(str, buffer_pointer,2000);
 //            while ((t = strtok(s, " ")) != NULL) {
 //                s = NULL;
 //                //PRINTS PARSED REQUEST BODY
