@@ -1,14 +1,18 @@
-# What is Grepet?
+# Grepet is going to suck but build it anyway. 
 
-Grepet is a light-weight HTTP server written in C.
+Grepet is a business logic kernal.
 
 # Grepet goal
+- light-weight HTTP server written in C 
+- Application logic and custom database.
 The goal is to create a social web app and server as one compiled binary.
 Amazon, google all started this way. It's kind of the best kept secret in the valley.
 The big feasibility problem I’ve encountered is updates while running.
 May have to use NGINX or UBUNTU IPTables command as a TCP load balancer in production.
 
 # Structure
+
+- tight coupling of server and application logic 
 
 The code structure is pretty simple. One file. Add functions. Server() get() post() read() write() etc
 
