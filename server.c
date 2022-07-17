@@ -27,11 +27,30 @@
 #endif
 #include <stdbool.h>
 
-http_parser_settings settings;
+//http_parser_settings settings; get parser to work object required
 
 //
 const char* html(){
-  char* html = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
+    FILE *fp;
+    char savedString[255];
+    fp = fopen("index.html", "r");
+    
+    // check there is no error opening the file
+
+    //     if (filePointer == NULL)
+//     {
+//       perror("Error: ");
+//       return(-1);
+//     }
+    
+    if(fgets(savedString, 255, filePointer) != NULL) {
+        // print the return value (aka string read in) to terminal
+        char* html = savedString);
+      }
+    fclose(filePointer);
+    filePointer = NULL;
+  //char* html = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
+    //char* html= fp;
   return html;
   }
 
@@ -121,8 +140,8 @@ int server() {
     my.clientque = 128;
     my.speed = 0;
     //int system(const char *"bash\ test.sh");
-    system("bash test2.sh");
-    printf("hi");
+    //system("bash test2.sh");
+    //printf("hi");
     while(1) {
         int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
         if (client_fd > 0) {
