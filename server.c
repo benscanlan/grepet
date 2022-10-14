@@ -1,17 +1,12 @@
-
 //https://stackoverflow.com/questions/46626660/getaddrinfo-and-inaddr-any
+//#include <openssl/md5.h> //https://github.com/coturn/coturn/issues/242
+//#include <pthread.h>https://www.geeksforgeeks.org/multithreading-c-2/
 
-
-//#include "http_parser.h"
-
-// dont want to use strcopy for security reasons?
-
-//input output
+//#include "http_parser.h" //http_parser_settings settings; get parser to work object required
 #include <stdio.h>
 #include <stdlib.h>
-//data types
 #include <string.h>
-//server()
+
 #include <sys/select.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -19,40 +14,36 @@
 #include <netdb.h>
 //#include <fcntl.h> // for open
 #include <unistd.h> // for close
-//encryption algos
-//#include <openssl/md5.h> //https://github.com/coturn/coturn/issues/242
+
 #ifndef SOCK_NONBLOCK
 #include <fcntl.h>
 # define SOCK_NONBLOCK O_NONBLOCK
 #endif
 #include <stdbool.h>
 
-//http_parser_settings settings; get parser to work object required
-
+//const char* html(){
+//    FILE *fp;
+//    char savedString[255];
+//    fp = fopen("index.html", "r");
 //
-const char* html(){
-    FILE *fp;
-    char savedString[255];
-    fp = fopen("index.html", "r");
-    
-    // check there is no error opening the file
+//    // check there is no error opening the file
+//
+//    //     if (filePointer == NULL)
+////     {
+////       perror("Error: ");
+////       return(-1);
+////     }
+//
+//    if(fgets(savedString, 255, filePointer) != NULL) {
+//        // print the return value (aka string read in) to terminal
+//        char* html = savedString);
+//      }
+//    fclose(filePointer);
+//    filePointer = NULL;
 
-    //     if (filePointer == NULL)
-//     {
-//       perror("Error: ");
-//       return(-1);
-//     }
-    
-    if(fgets(savedString, 255, filePointer) != NULL) {
-        // print the return value (aka string read in) to terminal
-        char* html = savedString);
-      }
-    fclose(filePointer);
-    filePointer = NULL;
-  //char* html = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
-    //char* html= fp;
-  return html;
-  }
+//    //char* html= fp;
+//  return html;
+//  }
 
 void myparser(char* buffer_pointer){
     char str[2048], *s = str, *t = NULL;
@@ -72,11 +63,15 @@ void myparser(char* buffer_pointer){
         }
     }
 int server() {
+    char* html_raw = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
     char headers[] = "HTTP/1.0 200 OK\r\nServer: Grepet\r\nContent-type:text/html\r\n\r\n";
     char buffer[2048];
     char *buffer_pointer = &buffer[0];
     char data[2048] = {0};
-    snprintf(data, sizeof data,"%s %s", headers, html());
+    
+    //snprintf(data, sizeof data,"%s %s", headers, html());
+    snprintf(data, sizeof data,"%s %s", headers, html_raw);
+    
     struct linger sl; //calling existing struct
     sl.l_onoff=1;
     sl.l_linger=0;
@@ -167,8 +162,6 @@ int server() {
 int main(int argc, char** argv){
     server();
     printf("calltest");
-//#include <pthread.h>https://www.geeksforgeeks.org/multithreading-c-2/
     exit(1);
-		
 }
 
