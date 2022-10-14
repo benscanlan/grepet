@@ -22,26 +22,7 @@
 #include <stdbool.h>
 
 //const char* html(){
-//    FILE *fp;
-//    char savedString[255];
-//    fp = fopen("index.html", "r");
 //
-//    // check there is no error opening the file
-//
-//    //     if (filePointer == NULL)
-////     {
-////       perror("Error: ");
-////       return(-1);
-////     }
-//
-//    if(fgets(savedString, 255, filePointer) != NULL) {
-//        // print the return value (aka string read in) to terminal
-//        char* html = savedString);
-//      }
-//    fclose(filePointer);
-//    filePointer = NULL;
-
-//    //char* html= fp;
 //  return html;
 //  }
 
@@ -140,13 +121,15 @@ int server() {
     while(1) {
         int client_fd = accept(sockfd,(struct sockaddr *) &client_addr, &addr_size);
         if (client_fd > 0) {
-            int request_size = read(client_fd, buffer, 2048);
+            //int request_size =
+            read(client_fd, buffer, 2048);
             // printf("%d\n", request_size);
             // printf("%d\n", client_fd);
             myparser(buffer_pointer);
             
             fflush(stdout);
-            int response_size = send(client_fd, data, strlen(data),0);
+            //int response_size =
+            send(client_fd, data, strlen(data),0);
             //printf("%d", n);
             //printf("%s", data);
             my.speed = my.speed + 1;
@@ -160,8 +143,48 @@ int server() {
 
 
 int main(int argc, char** argv){
-    server();
+    //server();
+    
+//
+//    FILE *fp;
+//    char savedString[255];
+//    fp = fopen("index.html", "r");
+//    printf("%s",fp);
+    // check there is no error opening the file
+
+    //     if (filePointer == NULL)
+//     {
+//       perror("Error: ");
+//       return(-1);
+//     }
+
+//    if(fgets(savedString, 255, filePointer) != NULL) {
+//        // print the return value (aka string read in) to terminal
+//        char* html = savedString);
+//      }
+//    fclose(filePointer);
+//    filePointer = NULL;
+
+    //char* html= fp;
+    
+
+    FILE *filePointer;
+    char dataToBeRead[500];
+    filePointer = fopen("./index.html", "r");
+    while( fgets ( dataToBeRead, 500, filePointer ) != NULL )
+    {
+     
+        // Print the dataToBeRead
+        printf( "%s" , dataToBeRead ) ;
+    }
+     
+    // Closing the file using fclose()
+    fclose(filePointer) ;
+    printf("%s",dataToBeRead);
     printf("calltest");
     exit(1);
 }
 
+//-Wno-unused-parameter
+//https://www.geeksforgeeks.org/basics-file-handling-c/
+//“r” – Searches file. If the file is opened successfully fopen( ) loads it into memory and sets up a pointer which points to the first character in it. If the file cannot be opened fopen( ) returns NULL.
