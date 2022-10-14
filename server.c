@@ -23,7 +23,6 @@
 
 //const char* html(){
 //
-//  return html;
 //  }
 
 void myparser(char* buffer_pointer){
@@ -50,9 +49,26 @@ int server() {
     char *buffer_pointer = &buffer[0];
     char data[2048] = {0};
     
-    //snprintf(data, sizeof data,"%s %s", headers, html());
-    snprintf(data, sizeof data,"%s %s", headers, html_raw);
+    //const char* html_pointer = html();
     
+    FILE *filePointer;
+    char dataToBeRead[500];
+    filePointer = fopen("./index.html", "r");
+    while( fgets ( dataToBeRead, 500, filePointer ) != NULL )
+    {
+        // Print the dataToBeRead
+        //printf( "%s" , dataToBeRead ) ;
+    }
+     
+    // Closing the file using fclose()
+    fclose(filePointer) ;
+    //printf("%s",dataToBeRead);
+    char* html_pointer = dataToBeRead;
+    //printf("%s",html_raw2);
+    
+    
+    snprintf(data, sizeof data,"%s %s", headers, html_pointer);
+    //snprintf(data, sizeof data,"%s %s", headers, html());
     struct linger sl; //calling existing struct
     sl.l_onoff=1;
     sl.l_linger=0;
@@ -143,8 +159,9 @@ int server() {
 
 
 int main(int argc, char** argv){
-    char* html_raw = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
-    //server();
+    //char* html_raw = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
+    
+    server();
 
     
     
@@ -164,20 +181,7 @@ int main(int argc, char** argv){
 
     
 
-    FILE *filePointer;
-    char dataToBeRead[500];
-    filePointer = fopen("./index.html", "r");
-    while( fgets ( dataToBeRead, 500, filePointer ) != NULL )
-    {
-        // Print the dataToBeRead
-        //printf( "%s" , dataToBeRead ) ;
-    }
-     
-    // Closing the file using fclose()
-    fclose(filePointer) ;
-    printf("%s",dataToBeRead);
-    char* html_raw2 = dataToBeRead;
-    printf("%s",html_raw2);
+
     printf("calltest");
     exit(1);
 }
