@@ -21,20 +21,11 @@
 #endif
 #include <stdbool.h>
 
-//const char* html(){
-//
-//  }
-
 void myparser(char* buffer_pointer){
     char str[2048], *s = str, *t = NULL;
-    /*Problem with strcpy(): The strcpy() function does not specify the size of the destination array, so buffer overrun is often a risk. Using strcpy() function to copy a large character array into a smaller one is dangerous, but if the string will fit, then it will not be worth the risk. If the destination string is not large enough to store the source string then the behavior of strcpy() is unspecified or undefined. https://www.geeksforgeeks.org/why-strcpy-and-strncpy-are-not-safe-to-use/*/
     strncpy(str, buffer_pointer,2000);
-//            while ((t = strtok(s, " ")) != NULL) {
-//                s = NULL;
-//                //PRINTS PARSED REQUEST BODY
-//                 printf("%s\n", t);
-//             }
     printf("\n");
+    //while ((t = strtok(s, " ")) != NULL)
     while ((t = strtok(s, "\t\n")) != NULL) {
         s = NULL;
         //PRINTS PARSED REQUEST BODY
@@ -42,14 +33,13 @@ void myparser(char* buffer_pointer){
         printf("\n");
         }
     }
+
 int server() {
-    char* html_raw = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
+    //char* html_raw = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
     char headers[] = "HTTP/1.0 200 OK\r\nServer: Grepet\r\nContent-type:text/html\r\n\r\n";
     char buffer[2048];
     char *buffer_pointer = &buffer[0];
     char data[2048] = {0};
-    
-    //const char* html_pointer = html();
     
     FILE *filePointer;
     char dataToBeRead[500];
@@ -160,15 +150,27 @@ int server() {
 
 int main(int argc, char** argv){
     //char* html_raw = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
-    
     server();
+    printf("calltest");
+    exit(1);
+}
+// next parse request for a specific file in a directory 
 
-    
-    
-    
-    // check there is no error opening the file
 
-    //     if (filePointer == NULL)
+
+//-Wno-unused-parameter
+//https://www.geeksforgeeks.org/basics-file-handling-c/
+//“r” – Searches file. If the file is opened successfully fopen( ) loads it into memory and sets up a pointer which points to the first character in it. If the file cannot be opened fopen( ) returns NULL.
+
+/*Problem with strcpy(): The strcpy() function does not specify the size of the destination array, so buffer overrun is often a risk. Using strcpy() function to copy a large character array into a smaller one is dangerous, but if the string will fit, then it will not be worth the risk. If the destination string is not large enough to store the source string then the behavior of strcpy() is unspecified or undefined. https://www.geeksforgeeks.org/why-strcpy-and-strncpy-are-not-safe-to-use/*/
+
+
+
+
+
+// check there is no error opening the file
+
+//     if (filePointer == NULL)
 //     {
 //       perror("Error: ");
 //       return(-1);
@@ -178,14 +180,3 @@ int main(int argc, char** argv){
 //        // print the return value (aka string read in) to terminal
 //        char* html = savedString);
 //      }
-
-    
-
-
-    printf("calltest");
-    exit(1);
-}
-
-//-Wno-unused-parameter
-//https://www.geeksforgeeks.org/basics-file-handling-c/
-//“r” – Searches file. If the file is opened successfully fopen( ) loads it into memory and sets up a pointer which points to the first character in it. If the file cannot be opened fopen( ) returns NULL.
