@@ -143,13 +143,12 @@ int server() {
 
 
 int main(int argc, char** argv){
+    char* html_raw = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
     //server();
+
     
-//
-//    FILE *fp;
-//    char savedString[255];
-//    fp = fopen("index.html", "r");
-//    printf("%s",fp);
+    
+    
     // check there is no error opening the file
 
     //     if (filePointer == NULL)
@@ -162,10 +161,7 @@ int main(int argc, char** argv){
 //        // print the return value (aka string read in) to terminal
 //        char* html = savedString);
 //      }
-//    fclose(filePointer);
-//    filePointer = NULL;
 
-    //char* html= fp;
     
 
     FILE *filePointer;
@@ -173,14 +169,15 @@ int main(int argc, char** argv){
     filePointer = fopen("./index.html", "r");
     while( fgets ( dataToBeRead, 500, filePointer ) != NULL )
     {
-     
         // Print the dataToBeRead
-        printf( "%s" , dataToBeRead ) ;
+        //printf( "%s" , dataToBeRead ) ;
     }
      
     // Closing the file using fclose()
     fclose(filePointer) ;
     printf("%s",dataToBeRead);
+    char* html_raw2 = dataToBeRead;
+    printf("%s",html_raw2);
     printf("calltest");
     exit(1);
 }
