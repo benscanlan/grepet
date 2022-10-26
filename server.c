@@ -22,7 +22,7 @@
 #include <stdbool.h>
 
 void myparser(char* buffer_pointer){
-    char str[2048], *s = str, *t = NULL;
+    char str[2048], *s = str, *t = NULL, *var=NULL;
     strncpy(str, buffer_pointer,2000);
     printf("\n");
     //while ((t = strtok(s, " ")) != NULL)
@@ -33,6 +33,24 @@ void myparser(char* buffer_pointer){
         printf("\n");
         }
     }
+
+void myparser2(char* buffer_pointer){
+    char str[2048], *s = str, *t = NULL, *var=NULL;
+    strncpy(str, buffer_pointer,2000);
+    printf("\n");
+    while ((t = strtok(s, " ")) != NULL) {
+        s = NULL;
+        //PRINTS PARSED REQUEST BODY
+        printf("%s\n", t);
+        
+        if (t[0] == 'G'){
+            printf("%s\n", t);
+        }
+        }
+    }
+
+
+
 
 int server() {
     //char* html_raw = "<!DOCTYPE html><body><h1>Grepet.com</h1><p>Hi Guys!</p></body></html>\r\n";
@@ -131,8 +149,9 @@ int server() {
             read(client_fd, buffer, 2048);
             // printf("%d\n", request_size);
             // printf("%d\n", client_fd);
-            myparser(buffer_pointer);
-            
+//            myparser(buffer_pointer);
+            //string balance[10];
+            myparser2(buffer_pointer);
             fflush(stdout);
             //int response_size =
             send(client_fd, data, strlen(data),0);
