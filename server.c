@@ -103,7 +103,7 @@ int server() {
     //setblocking(sockfd,0);
 
     int sockfd;
-    if (getaddrinfo(NULL, "5432", &hints, &server) == 0)
+    if (getaddrinfo(NULL, "80", &hints, &server) == 0)
         //printf("test1 pass");
     {
     for (struct addrinfo *addr = server; addr != NULL; addr = addr->ai_next)
